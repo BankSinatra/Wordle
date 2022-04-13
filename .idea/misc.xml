@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16485507246376813" />
+        <entry key="app/src/main/res/layout/fragment_wordle.xml" value="0.20652173913043478" />
       </map>
     </option>
   </component>
