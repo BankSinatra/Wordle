@@ -3,12 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/letter_block_green.xml" value="0.163" />
         <entry key="app/src/main/res/drawable/letter_block_unchecked.xml" value="0.163" />
+        <entry key="app/src/main/res/drawable/letter_block_unsubmitted.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/letter_block_wrong.xml" value="0.163" />
+        <entry key="app/src/main/res/drawable/letter_block_yellow.xml" value="0.163" />
         <entry key="app/src/main/res/font-v26/open_sans.xml" value="0.2708333333333333" />
         <entry key="app/src/main/res/font/open_sams.xml" value="0.2708333333333333" />
         <entry key="app/src/main/res/font/open_sans.xml" value="0.2708333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16485507246376813" />
-        <entry key="app/src/main/res/layout/fragment_wordle.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_game.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_wordle.xml" value="0.22" />
       </map>
     </option>
   </component>
