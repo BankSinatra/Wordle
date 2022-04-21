@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.wordle.game.GameFragment">
 
     <LinearLayout
@@ -25,138 +25,109 @@
                 android:id="@+id/word_1_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='H' />
 
             <EditText
                 android:id="@+id/word_1_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='A' />
 
             <EditText
                 android:id="@+id/word_1_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_1_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_1_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='Y' />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/word_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLength="1"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/word_2_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='H' />
 
             <EditText
                 android:id="@+id/word_2_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='A' />
 
             <EditText
                 android:id="@+id/word_2_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_2_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_2_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='Y' />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/word_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLength="1"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/word_3_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='H' />
 
             <EditText
                 android:id="@+id/word_3_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                
                 tools:text='A' />
-
+            
             <EditText
                 android:id="@+id/word_3_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_3_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_3_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='Y' />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/word_4"
             android:layout_width="wrap_content"
@@ -167,42 +138,33 @@
                 android:id="@+id/word_4_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='H' />
 
             <EditText
                 android:id="@+id/word_4_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='A' />
 
             <EditText
                 android:id="@+id/word_4_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_4_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_4_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='Y' />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/word_5"
             android:layout_width="wrap_content"
@@ -213,42 +175,33 @@
                 android:id="@+id/word_5_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='H' />
 
             <EditText
                 android:id="@+id/word_5_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='A' />
 
             <EditText
                 android:id="@+id/word_5_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_5_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_5_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='Y' />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/word_6"
             android:layout_width="wrap_content"
@@ -259,40 +212,30 @@
                 android:id="@+id/word_6_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='H' />
 
             <EditText
                 android:id="@+id/word_6_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='A' />
 
             <EditText
                 android:id="@+id/word_6_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_6_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='P' />
 
             <EditText
                 android:id="@+id/word_6_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                android:maxLength="1"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 tools:text='Y' />
         </LinearLayout>
 
