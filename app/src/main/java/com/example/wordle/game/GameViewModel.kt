@@ -1,5 +1,6 @@
 package com.example.wordle.game
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 const val NUMBER_OF_GUESSES = 6
@@ -7,9 +8,21 @@ const val NUMBER_OF_GUESSES = 6
 
 
 class GameViewModel(): ViewModel(){
-    //TODO: Set up a variable that knows the random word and how many tries the user has
+    private val _currentWord = MutableLiveData<String>()
+    val currentWord : LiveData<String> = _currentWord
 
-    //TODO: Set up a variable that generates a random word
+    private val _userGuesses = MutableLiveData<Int>(0)
+    val userGuesses : LiveData<Int> = _userGuesses
+
+    private fun generateWord(){
+        val word = allWordsList.random()
+    }
+
+    private fun resetGame(){
+        generateWord()
+        _userGuesses.value = 0
+    }
+
 
     //TODO: Function that determines which editTexts are open for editing
 
