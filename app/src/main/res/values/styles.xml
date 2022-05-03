@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="letter_block">
-        <item name="android:layout_width"> wrap_content</item>
-        <item name="android:layout_height"> wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:width">58dp</item>
         <item name="android:height">58dp</item>
         <item name="fontFamily">@font/open_sans_bold</item>
@@ -12,5 +13,8 @@
         <item name="android:layout_marginEnd">4dp</item>
         <item name="android:layout_marginStart">4dp</item>
         <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:cursorVisible">false</item>
+
     </style>
 </resources>

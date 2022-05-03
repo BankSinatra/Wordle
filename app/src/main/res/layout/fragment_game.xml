@@ -22,31 +22,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <EditText
                 android:id="@+id/word_1_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='H' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_1_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='A' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_1_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_1_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_1_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
@@ -59,31 +59,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <EditText
                 android:id="@+id/word_2_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='H' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_2_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='A' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_2_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_2_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_2_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
@@ -94,35 +94,35 @@
             android:id="@+id/word_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            
+
             android:orientation="horizontal">
 
-            <TextView
+            <EditText
                 android:id="@+id/word_3_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='H' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_3_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
-                
+
                 tools:text='A' />
-            
-            <TextView
+
+            <EditText
                 android:id="@+id/word_3_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_3_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_3_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
@@ -135,31 +135,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <EditText
                 android:id="@+id/word_4_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='H' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_4_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='A' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_4_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_4_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_4_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
@@ -172,31 +172,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <EditText
                 android:id="@+id/word_5_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='H' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_5_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='A' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_5_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_5_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_5_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
@@ -209,31 +209,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <EditText
                 android:id="@+id/word_6_letter_1"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='H' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_6_letter_2"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='A' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_6_letter_3"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_6_letter_4"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
                 tools:text='P' />
 
-            <TextView
+            <EditText
                 android:id="@+id/word_6_letter_5"
                 style="@style/letter_block"
                 android:background="@drawable/letter_block_unsubmitted"
