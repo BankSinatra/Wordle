@@ -3,9 +3,12 @@ package com.example.wordle.game
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.forEach
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.wordle.databinding.FragmentGameBinding
@@ -26,24 +29,25 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.letterGrid.forEach {
-            //Log.i("letter!", "word id: ${resources.getResourceName(it.id)}")
-            if (it is ViewGroup){
+            if (it is ViewGroup) {
                 for (i in 0 until it.childCount) {
-                    val child = it.getChildAt(i)
-                    child.setOnClickListener{
-                        child.isFocusableInTouchMode = true //This will create bugs in the future btw
-                        showKeyboard(child,requireContext())
-                    }
-                    //Log.i("letter!", "word ${i+1} letter id: ${resources.getResourceName(child.id)}")
+                    //TODO: Do something here
                 }
             }
         }
+        val m = findChildAtIndex(binding.letterGrid[viewModel.currentLetter], viewModel.currentWord)
+        Log.i("Word", resources.getResourceName(m.id))
+
+
     }
 }
 
-    fun showKeyboard(view: View, context: Context) {
-        if (view.requestFocus()) {
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
-        }
+
+fun findChildAtIndex(view: View, index: Int) : View{
+    var myView = view
+    if (view is ViewGroup) {
+        myView = view[index]
+
     }
+    return myView
+}
