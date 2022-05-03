@@ -13,8 +13,5 @@
         <item name="android:layout_marginEnd">4dp</item>
         <item name="android:layout_marginStart">4dp</item>
         <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:maxLength">1</item>
-        <item name="android:cursorVisible">false</item>
-
     </style>
 </resources>

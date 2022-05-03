@@ -11,27 +11,11 @@ class GameViewModel() : ViewModel() {
     private var _currentWord: Int = 0
     val currentLetter = _currentLetter
     val currentWord = _currentWord
-    lateinit var word: String
-    lateinit var grid: List<List<LetterBlock>>
+    private lateinit var word: String
 
     init {
         resetGame()
         generateWord()
-        grid = generateGrid()
-    }
-
-    private fun generateGrid(): List<List<LetterBlock>> {
-        val myList = mutableListOf(mutableListOf<LetterBlock>())
-        for (word in 0..5) {
-            myList.add(mutableListOf())
-            for (letter in 0..4)
-                myList[word].add(LetterBlock())
-        }
-        return myList.toList()
-    }
-
-    fun findFocus() {
-        //TODO: This sets the focus for the right editText
     }
 
     private fun generateWord() {
