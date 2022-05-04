@@ -34,13 +34,13 @@ class GameFragment : Fragment() {
                 for (i in 0 until it.childCount) {
                     val child = it.getChildAt(i)
                     child.setOnClickListener {
-                        showKeyBoard(binding.guess1, requireContext())
+                        showKeyBoard(findEditTextByWord(), requireContext())
                     }
                 }
             }
         }
     }
-    fun findEditTextByWord(): View{
+    private fun findEditTextByWord(): View{
         val x = binding.guess1
         when (viewModel.currentWord){
             1 -> return binding.guess2
@@ -52,8 +52,6 @@ class GameFragment : Fragment() {
         return x
     }
 }
-
-
 
 fun showKeyBoard(view: View, context: Context ){
     view.requestFocus()
