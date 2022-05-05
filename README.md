@@ -1,14 +1,11 @@
 # WORDLE Clone
 
----
 
 🚧The game is still being developed 🚧
 
 This is the game as of May 5th 2022
 
 # Intro
-
----
 
 The Wordle clone app plays just like the traditional wordle. It even has a score and  Except there are a couple of features
 
