@@ -1,15 +1,16 @@
 package com.example.wordle.game
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.view.forEach
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.wordle.databinding.FragmentGameBinding
@@ -30,17 +31,32 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //showKeyBoard(findEditTextByWord(), requireContext())
-        binding.letterGrid.forEach { view ->
-            if (view is ViewGroup) {
-                for (i in 0 until view.childCount) {
-                    val child = view.getChildAt(i)
+        binding.letterGrid.forEach {
+            if (it is ViewGroup) {
+                for (i in 0 until it.childCount) {
+                    val child = it.getChildAt(i)
                     child.setOnClickListener {
-                        val ed = findEditTextByWord()
-                        ed.requestFocus()
-                        showKeyBoard(ed, requireContext())
+                        showKeyBoard(findEditTextByWord(), requireContext())
                     }
                 }
             }
+        }
+        findEditTextByWord().doOnTextChanged { text, start, before, count ->
+            val linearLayout = findLinearLayoutByWord()
+            linearLayout.forEach {
+                if (it is TextView){
+                    it.text =""
+                }
+                if (findEditTextByWord().text.isNotEmpty()){
+                    for (x in findEditTextByWord().text.indices){
+                        val child =  linearLayout.getChildAt(x)
+                        if (child is TextView){
+                            child.text = findEditTextByWord().text[x].toString().uppercase()
+                        }
+                    }
+                }
+            }
+
         }
     }
     private fun findEditTextByWord(): EditText {
@@ -53,11 +69,21 @@ class GameFragment : Fragment() {
             else -> binding.guess6
         }
     }
+
+    private fun findLinearLayoutByWord() : LinearLayout{
+        return when (viewModel.currentWord) {
+            0 -> binding.word1
+            1 -> binding.word2
+            2 -> binding.word3
+            3 -> binding.word4
+            4 -> binding.word5
+            else -> binding.word6
+        }
+    }
 }
 
 fun showKeyBoard(editText: EditText, context: Context){
     editText.requestFocus()
-
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
 
