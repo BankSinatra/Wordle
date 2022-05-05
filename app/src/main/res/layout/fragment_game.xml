@@ -252,38 +252,36 @@
     <EditText
         android:id="@+id/guess2"
         android:layout_width="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guess1"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/edit_text"
         android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/guess3"
         android:layout_width="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guess2"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/edit_text"
         android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/guess4"
         android:layout_width="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guess3"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/edit_text"
         android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/guess5"
         android:layout_width="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guess4"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/edit_text"
         android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/guess6"
         android:layout_width="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guess5"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/edit_text"
         android:layout_height="wrap_content"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
