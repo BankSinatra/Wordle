@@ -14,7 +14,8 @@ class GameViewModel : ViewModel() {
     val guessNumber: LiveData<Int> = _guessNumber
 
     //This variable keeps track of the word we are guessing
-    val guess = MutableLiveData<String>()
+
+    val guess = MutableLiveData<String>("")
 
     //We'll pick a word to guess later hold on
     private lateinit var word: String
@@ -32,13 +33,8 @@ class GameViewModel : ViewModel() {
         resetGame()
     }
 
-    private fun textValidation(char: Char): Boolean {
-        val pattern = Regex("[a-zA-Z]") //If the character input is a letter
-        return pattern.containsMatchIn(char.toString())
+    fun submitWord() {
+        _guessNumber.value = _guessNumber.value?.plus(1)
+        guess.value = ""
     }
-
-    fun submitWord(){
-        Log.i("ViewModel", "SubmitWord called")
-    }
-
 }
