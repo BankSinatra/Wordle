@@ -1,22 +1,23 @@
 package com.example.wordle.game
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.wordle.models.LetterBlock
 
 const val NUMBER_OF_GUESSES = 6
 
 
-class GameViewModel() : ViewModel() {
-    private var _currentLetter: Int = 0
-    private var _currentWord: Int = 0
-    val currentLetter = _currentLetter
-    val currentWord = _currentWord
-    private lateinit var word: String
+class GameViewModel : ViewModel() {
+    //This variable tracks how many times we have guessed
+    private val _guessNumber = MutableLiveData<Int>()
+    val guessNumber: LiveData<Int> = _guessNumber
 
-    init {
-        resetGame()
-        generateWord()
-    }
+    //This variable keeps track of the word we are guessing
+    val guess = MutableLiveData<String>()
+
+    //We'll pick a word to guess later hold on
+    private lateinit var word: String
 
     private fun generateWord() {
         word = allWordsList.random()
@@ -24,8 +25,11 @@ class GameViewModel() : ViewModel() {
 
     private fun resetGame() {
         generateWord()
-        _currentLetter = 0
-        _currentWord = 0
+        _guessNumber.value = 0
+    }
+
+    init {
+        resetGame()
     }
 
     private fun textValidation(char: Char): Boolean {
@@ -33,5 +37,8 @@ class GameViewModel() : ViewModel() {
         return pattern.containsMatchIn(char.toString())
     }
 
+    fun submitWord(){
+        Log.i("ViewModel", "SubmitWord called")
+    }
 
 }
