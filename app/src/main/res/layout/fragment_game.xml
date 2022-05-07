@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.wordle.game.GameViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.wordle.game.GameFragment">
+
 
     <LinearLayout
         android:id="@+id/letter_grid"
@@ -243,45 +252,15 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/guess1"
+        android:id="@+id/guess_field"
         android:layout_width="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/edit_text"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/guess2"
-        android:layout_width="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/guess1"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/edit_text"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/guess3"
-        android:layout_width="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/guess2"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/edit_text"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/guess4"
-        android:layout_width="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/guess3"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/edit_text"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/guess5"
-        android:layout_width="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/guess4"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/edit_text"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/guess6"
-        android:layout_width="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/guess5"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/edit_text"
-        android:layout_height="wrap_content"/>
+        android:text="@={viewmodel.guess}"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:hint="Pick a 5 letter word"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
