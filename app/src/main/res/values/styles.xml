@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="letter_block">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -17,8 +18,8 @@
     <style name="edit_text">
         <item name="android:textColor">@android:color/transparent</item>
         <item name="android:cursorVisible">false</item>
-        <item name="android:maxLength">5</item>
         <item name="android:inputType">textVisiblePassword</item>
         <item name="backgroundTint">#0000</item>
+        <item name="android:imeOptions">actionDone</item>
     </style>
 </resources>

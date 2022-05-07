@@ -1,266 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="viewmodel"
             type="com.example.wordle.game.GameViewModel" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.wordle.game.GameFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.wordle.game.GameFragment">
 
-    <LinearLayout
-        android:id="@+id/letter_grid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="58dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/word_1"
+            android:id="@+id/letter_grid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="58dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/word_1_letter_1"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='H' />
+            <LinearLayout
+                android:id="@+id/word_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/word_1_letter_2"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='A' />
+                <TextView
+                    android:id="@+id/word_1_letter_1"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='H' />
 
-            <TextView
-                android:id="@+id/word_1_letter_3"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
+                <TextView
+                    android:id="@+id/word_1_letter_2"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='A' />
 
-            <TextView
-                android:id="@+id/word_1_letter_4"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
+                <TextView
+                    android:id="@+id/word_1_letter_3"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
 
-            <TextView
-                android:id="@+id/word_1_letter_5"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='Y' />
+                <TextView
+                    android:id="@+id/word_1_letter_4"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_1_letter_5"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='Y' />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/word_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/word_2_letter_1"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='H' />
+
+                <TextView
+                    android:id="@+id/word_2_letter_2"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='A' />
+
+                <TextView
+                    android:id="@+id/word_2_letter_3"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_2_letter_4"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_2_letter_5"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='Y' />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/word_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/word_3_letter_1"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='H' />
+
+                <TextView
+                    android:id="@+id/word_3_letter_2"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+
+                    tools:text='A' />
+
+                <TextView
+                    android:id="@+id/word_3_letter_3"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_3_letter_4"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_3_letter_5"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='Y' />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/word_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/word_4_letter_1"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='H' />
+
+                <TextView
+                    android:id="@+id/word_4_letter_2"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='A' />
+
+                <TextView
+                    android:id="@+id/word_4_letter_3"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_4_letter_4"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_4_letter_5"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='Y' />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/word_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/word_5_letter_1"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='H' />
+
+                <TextView
+                    android:id="@+id/word_5_letter_2"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='A' />
+
+                <TextView
+                    android:id="@+id/word_5_letter_3"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_5_letter_4"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_5_letter_5"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='Y' />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/word_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/word_6_letter_1"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='H' />
+
+                <TextView
+                    android:id="@+id/word_6_letter_2"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='A' />
+
+                <TextView
+                    android:id="@+id/word_6_letter_3"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_6_letter_4"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='P' />
+
+                <TextView
+                    android:id="@+id/word_6_letter_5"
+                    style="@style/letter_block"
+                    android:background="@drawable/letter_block_unsubmitted"
+                    tools:text='Y' />
+            </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/word_2"
+        <EditText
+            android:id="@+id/guess_field"
+            style="@style/edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/word_2_letter_1"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='H' />
-
-            <TextView
-                android:id="@+id/word_2_letter_2"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='A' />
-
-            <TextView
-                android:id="@+id/word_2_letter_3"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
-
-            <TextView
-                android:id="@+id/word_2_letter_4"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
-
-            <TextView
-                android:id="@+id/word_2_letter_5"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='Y' />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/word_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/word_3_letter_1"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='H' />
-
-            <TextView
-                android:id="@+id/word_3_letter_2"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-
-                tools:text='A' />
-
-            <TextView
-                android:id="@+id/word_3_letter_3"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
-
-            <TextView
-                android:id="@+id/word_3_letter_4"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
-
-            <TextView
-                android:id="@+id/word_3_letter_5"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='Y' />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/word_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/word_4_letter_1"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='H' />
-
-            <TextView
-                android:id="@+id/word_4_letter_2"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='A' />
-
-            <TextView
-                android:id="@+id/word_4_letter_3"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
-
-            <TextView
-                android:id="@+id/word_4_letter_4"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
-
-            <TextView
-                android:id="@+id/word_4_letter_5"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='Y' />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/word_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/word_5_letter_1"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='H' />
-
-            <TextView
-                android:id="@+id/word_5_letter_2"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='A' />
-
-            <TextView
-                android:id="@+id/word_5_letter_3"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
-
-            <TextView
-                android:id="@+id/word_5_letter_4"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
-
-            <TextView
-                android:id="@+id/word_5_letter_5"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='Y' />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/word_6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/word_6_letter_1"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='H' />
-
-            <TextView
-                android:id="@+id/word_6_letter_2"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='A' />
-
-            <TextView
-                android:id="@+id/word_6_letter_3"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
-
-            <TextView
-                android:id="@+id/word_6_letter_4"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='P' />
-
-            <TextView
-                android:id="@+id/word_6_letter_5"
-                style="@style/letter_block"
-                android:background="@drawable/letter_block_unsubmitted"
-                tools:text='Y' />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/guess_field"
-        android:layout_width="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/edit_text"
-        android:text="@={viewmodel.guess}"
-        android:layout_height="wrap_content"
-        android:importantForAutofill="no"
-        android:hint="Pick a 5 letter word"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:importantForAutofill="no"
+            android:text="@={viewmodel.guess}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
