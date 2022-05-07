@@ -34,7 +34,35 @@ class GameViewModel : ViewModel() {
     }
 
     fun submitWord() {
-        _guessNumber.value = _guessNumber.value?.plus(1)
-        guess.value = ""
+        if (_guessNumber.value!! < NUMBER_OF_GUESSES-1){
+            _guessNumber.value = _guessNumber.value?.plus(1)
+            guess.value = ""
+        }
+
     }
+
+    fun evaluateWord(userGuess: String): MutableMap<Int, LetterState> {
+        val colorMap = mutableMapOf(0 to LetterState.WRONG, 1 to LetterState.WRONG, 2 to LetterState.WRONG, 3 to LetterState.WRONG, 4 to LetterState.WRONG)
+        for (index in word.indices){
+            if(userGuess[index] in word){
+                if(userGuess[index] == word[index]){
+                    colorMap[index] = LetterState.GREEN
+                }else{
+                    colorMap[index] = LetterState.YELLOW
+                }
+            }
+
+        }
+        return colorMap
+    }
+
+    fun wordValidation(userGuess: String): Boolean{
+        return userGuess in allWordsList
+    }
+}
+
+enum class LetterState(){
+    YELLOW,
+    GREEN,
+    WRONG
 }
