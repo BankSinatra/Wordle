@@ -1,7 +1,8 @@
 package com.example.wordle.game
 
 val allWordsList: List<String> =
-    listOf("which",
+    listOf(
+        "which",
         "about",
         "would",
         "these",
