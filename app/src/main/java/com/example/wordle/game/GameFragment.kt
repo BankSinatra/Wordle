@@ -1,5 +1,7 @@
 package com.example.wordle.game
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.text.InputFilter
@@ -7,6 +9,7 @@ import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.CycleInterpolator
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -32,7 +35,7 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGameBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        viewModel = ViewModelProvider(this)[GameViewModel::class.java]
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
         return binding.root
@@ -101,11 +104,12 @@ class GameFragment : Fragment() {
                             removeClickListeners(wordView) // You can't interact with submitted blocks after submitting
                             viewModel.submitWord()
                         }else{
-                            //TODO: Let the user know that this is not a real word
+                            invalidationShake(wordView)
                             Toast.makeText(context, "Not in word list", Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         //TODO: Let the user know that the word is not long enough
+                        invalidationShake(wordView)
                         Toast.makeText(context, "Not enough letters", Toast.LENGTH_SHORT).show()
                     }
                     true
@@ -157,12 +161,31 @@ class GameFragment : Fragment() {
         val colorMap = viewModel.guess.value?.let { viewModel.evaluateWord(it) }
         for (letterIndex in 0 until view.childCount) {
             val child = wordView.getChildAt(letterIndex)
-            if (colorMap?.get(letterIndex) == LetterState.GREEN) {
-                child.setBackgroundResource(R.drawable.letter_block_green)
-            }else if(colorMap?.get(letterIndex) == LetterState.YELLOW){
-                child.setBackgroundResource(R.drawable.letter_block_yellow)
-            }else{
-                child.setBackgroundResource(R.drawable.letter_block_wrong)
+            when {
+                colorMap?.get(letterIndex) == LetterState.GREEN -> {
+                    child.setBackgroundResource(R.drawable.letter_block_green)
+                }
+                colorMap?.get(letterIndex) == LetterState.YELLOW -> {
+                    child.setBackgroundResource(R.drawable.letter_block_yellow)
+                }
+                else -> {
+                    child.setBackgroundResource(R.drawable.letter_block_wrong)
+                }
+            }
+        }
+    }
+
+    private fun invalidationShake(view:View){
+        val objInterpolator = CycleInterpolator(3f)
+        val translateRight = ObjectAnimator.ofFloat(view, "translationX", 40f)
+        translateRight.duration = 75
+        val translateLeft = ObjectAnimator.ofFloat(view, "translationX", -80f)
+        translateLeft.duration = 75
+        AnimatorSet().apply {
+            playSequentially(translateRight, translateLeft)
+            interpolator = objInterpolator
+            if (!this.isRunning){
+                start()
             }
         }
     }
