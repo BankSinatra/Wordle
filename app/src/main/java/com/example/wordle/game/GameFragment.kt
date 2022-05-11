@@ -1,5 +1,7 @@
 package com.example.wordle.game
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
@@ -28,6 +30,7 @@ class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
     private lateinit var viewModel: GameViewModel
     private lateinit var wordView: LinearLayout // Keeps track of the linearlayout that is edited
+    private var tempWord = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,11 +102,12 @@ class GameFragment : Fragment() {
                 EditorInfo.IME_ACTION_DONE -> {
                     //Check to see if the string length is 5 then submit it.
                     if (viewModel.guess.value?.length == 5) {
-                        if(viewModel.wordValidation(viewModel.guess.value!!)){
-                            changeBackground(wordView)
+                        if (viewModel.wordValidation(viewModel.guess.value!!)) {
+                            tempWord = viewModel.guess.value.toString()
+                            groupAnimation(wordView)
                             removeClickListeners(wordView) // You can't interact with submitted blocks after submitting
                             viewModel.submitWord()
-                        }else{
+                        } else {
                             invalidationShake(wordView)
                             Toast.makeText(context, "Not in word list", Toast.LENGTH_SHORT).show()
                         }
@@ -120,7 +124,7 @@ class GameFragment : Fragment() {
         val letterFilter = AlphabetFilter()
         val maxLength = InputFilter.LengthFilter(5)
         binding.guessField.filters = arrayOf(letterFilter, maxLength)
-        binding.guessField.doOnTextChanged { text, start, before, count ->
+        binding.guessField.doOnTextChanged { _, _, _, _ ->
             wordView.forEach {
                 if (it is TextView) {
                     it.text = ""
@@ -157,25 +161,22 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun changeBackground(view: LinearLayout){
-        val colorMap = viewModel.guess.value?.let { viewModel.evaluateWord(it) }
-        for (letterIndex in 0 until view.childCount) {
-            val child = wordView.getChildAt(letterIndex)
-            when {
-                colorMap?.get(letterIndex) == LetterState.GREEN -> {
-                    child.setBackgroundResource(R.drawable.letter_block_green)
-                }
-                colorMap?.get(letterIndex) == LetterState.YELLOW -> {
-                    child.setBackgroundResource(R.drawable.letter_block_yellow)
-                }
-                else -> {
-                    child.setBackgroundResource(R.drawable.letter_block_wrong)
-                }
+    private fun changeBackground(letterIndex: Int): Int {
+        val colorMap = viewModel.evaluateWord(tempWord)
+        return when {
+            colorMap.get(letterIndex) == LetterState.GREEN -> {
+                (R.drawable.letter_block_green)
+            }
+            colorMap.get(letterIndex) == LetterState.YELLOW -> {
+                (R.drawable.letter_block_yellow)
+            }
+            else -> {
+                (R.drawable.letter_block_wrong)
             }
         }
     }
 
-    private fun invalidationShake(view:View){
+    private fun invalidationShake(view: View) {
         val objInterpolator = CycleInterpolator(3f)
         val translateRight = ObjectAnimator.ofFloat(view, "translationX", 40f)
         translateRight.duration = 75
@@ -184,9 +185,29 @@ class GameFragment : Fragment() {
         AnimatorSet().apply {
             playSequentially(translateRight, translateLeft)
             interpolator = objInterpolator
-            if (!this.isRunning){
+            if (!this.isRunning) {
                 start()
             }
+        }
+    }
+
+    private fun groupAnimation(linearLayout: ViewGroup) {
+        var offsetTime = 0
+        for (index in 0 until linearLayout.childCount) {
+            val child = linearLayout.getChildAt(index)
+            child.rotationX = 0f
+            child.animate().apply {
+                rotationX(90f)
+                startDelay = offsetTime.toLong()
+                setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        child.setBackgroundResource(changeBackground(index))
+                        child.rotationX = 270f
+                        child.animate().rotationX(360f).setListener(null)
+                    }
+                })
+            }
+            offsetTime += 75
         }
     }
 }
