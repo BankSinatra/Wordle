@@ -1,6 +1,5 @@
 package com.example.wordle.game
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,9 +12,9 @@ class GameViewModel : ViewModel() {
     private val _guessNumber = MutableLiveData<Int>()
     val guessNumber: LiveData<Int> = _guessNumber
 
-    //This variable keeps track of the word we are guessing
+        //This variable keeps track of the word we are guessing
 
-    val guess = MutableLiveData<String>("")
+    val guess = MutableLiveData("")
 
     //We'll pick a word to guess later hold on
     private lateinit var word: String
@@ -61,7 +60,7 @@ class GameViewModel : ViewModel() {
     }
 }
 
-enum class LetterState(){
+enum class LetterState{
     YELLOW,
     GREEN,
     WRONG
