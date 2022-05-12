@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Wordle</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="game_over">game over</string>
+    <string name="play_again">play again</string>
+    <string name="share">share</string>
 </resources>
