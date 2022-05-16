@@ -1,5 +1,7 @@
 package com.example.wordle.game
 
+//Fragment code. Determines how the xml interacts with the game and also
+
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
