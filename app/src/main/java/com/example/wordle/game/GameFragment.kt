@@ -176,6 +176,7 @@ class GameFragment : Fragment() {
 
     private fun showStatus(status: WordStatus, view: TextView){
         view.visibility = View.VISIBLE
+        view.alpha = 1f
         when (status){
             WordStatus.TooShort -> {
                 view.text = resources.getText(R.string.short_word)
@@ -187,7 +188,7 @@ class GameFragment : Fragment() {
                 view.text = viewModel.getWord()
             }
         }
-        view.postDelayed({ view.visibility = View.INVISIBLE }, 1200)
+        view.postDelayed({ viewFadeOutAnimation(view) }, 1200)
     }
 
     private fun invalidationShakeAnimation(view: View) {
@@ -222,6 +223,13 @@ class GameFragment : Fragment() {
                 })
             }
             offsetTime += 75
+        }
+    }
+
+    private fun viewFadeOutAnimation(view: View){
+        view.animate().apply {
+           alpha(0f)
+            duration = 200
         }
     }
 }
