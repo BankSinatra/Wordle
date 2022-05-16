@@ -17,7 +17,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.forEach
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -104,17 +103,16 @@ class GameFragment : Fragment() {
                     if (viewModel.guess.value?.length == 5) {
                         if (viewModel.wordValidation(viewModel.guess.value!!)) {
                             tempWord = viewModel.guess.value.toString()
-                            groupAnimation(wordView)
+                            wordRevealAnimation(wordView)
                             removeClickListeners(wordView) // You can't interact with submitted blocks after submitting
                             viewModel.submitWord()
                         } else {
-                            invalidationShake(wordView)
-                            Toast.makeText(context, "Not in word list", Toast.LENGTH_SHORT).show()
+                            invalidationShakeAnimation(wordView)
+                            showStatus(WordStatus.NonWord, binding.textStatus)
                         }
                     } else {
-                        //TODO: Let the user know that the word is not long enough
-                        invalidationShake(wordView)
-                        Toast.makeText(context, "Not enough letters", Toast.LENGTH_SHORT).show()
+                        invalidationShakeAnimation(wordView)
+                        showStatus(WordStatus.TooShort, binding.textStatus)
                     }
                     true
                 }
@@ -164,10 +162,10 @@ class GameFragment : Fragment() {
     private fun changeBackground(letterIndex: Int): Int {
         val colorMap = viewModel.evaluateWord(tempWord)
         return when {
-            colorMap.get(letterIndex) == LetterState.GREEN -> {
+            colorMap[letterIndex] == LetterState.GREEN -> {
                 (R.drawable.letter_block_green)
             }
-            colorMap.get(letterIndex) == LetterState.YELLOW -> {
+            colorMap[letterIndex] == LetterState.YELLOW -> {
                 (R.drawable.letter_block_yellow)
             }
             else -> {
@@ -176,7 +174,23 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun invalidationShake(view: View) {
+    private fun showStatus(status: WordStatus, view: TextView){
+        view.visibility = View.VISIBLE
+        when (status){
+            WordStatus.TooShort -> {
+                view.text = resources.getText(R.string.short_word)
+            }
+            WordStatus.NonWord -> {
+                view.text = resources.getText(R.string.non_word)
+            }
+            WordStatus.Word -> {
+                view.text = viewModel.getWord()
+            }
+        }
+        view.postDelayed({ view.visibility = View.INVISIBLE }, 1200)
+    }
+
+    private fun invalidationShakeAnimation(view: View) {
         val objInterpolator = CycleInterpolator(3f)
         val translateRight = ObjectAnimator.ofFloat(view, "translationX", 40f)
         translateRight.duration = 75
@@ -191,7 +205,7 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun groupAnimation(linearLayout: ViewGroup) {
+    private fun wordRevealAnimation(linearLayout: ViewGroup) {
         var offsetTime = 0
         for (index in 0 until linearLayout.childCount) {
             val child = linearLayout.getChildAt(index)
@@ -211,5 +225,3 @@ class GameFragment : Fragment() {
         }
     }
 }
-
-

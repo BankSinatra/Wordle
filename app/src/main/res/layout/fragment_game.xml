@@ -263,5 +263,21 @@
             android:text="@={viewmodel.guess}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_status_background"
+            android:fontFamily="@font/open_sans_regular"
+            android:padding="5dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/letter_grid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Not enough letters" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

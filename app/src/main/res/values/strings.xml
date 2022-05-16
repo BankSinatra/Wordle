@@ -4,4 +4,6 @@
     <string name="game_over">game over</string>
     <string name="play_again">play again</string>
     <string name="share">share</string>
+    <string name="non_word">Not in word list</string>
+    <string name="short_word">Not enough letters</string>
 </resources>
