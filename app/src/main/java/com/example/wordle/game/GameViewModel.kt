@@ -1,5 +1,6 @@
 package com.example.wordle.game
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,10 @@ class GameViewModel : ViewModel() {
     //This variable tracks how many times we have guessed
     private val _guessNumber = MutableLiveData<Int>()
     val guessNumber: LiveData<Int> = _guessNumber
+
+    //tracks if the game is over
+    private val _gameEndState = MutableLiveData(GameEndState())
+    val gameEndState: LiveData<GameEndState> = _gameEndState
 
     //This variable keeps track of the word we are guessing
     val guess = MutableLiveData("")
@@ -35,6 +40,9 @@ class GameViewModel : ViewModel() {
         if (_guessNumber.value!! < NUMBER_OF_GUESSES - 1) {
             _guessNumber.value = _guessNumber.value?.plus(1)
             guess.value = ""
+        }else{
+            Log.i("GameViewModel", "Game Over")
+            gameOver(false)
         }
     }
 
@@ -47,15 +55,24 @@ class GameViewModel : ViewModel() {
             4 to LetterState.WRONG
         )
         for (index in word.indices) {
-            if (userGuess[index] in word) {
-                if (userGuess[index] == word[index]) {
-                    colorMap[index] = LetterState.GREEN
-                } else {
-                    colorMap[index] = LetterState.YELLOW
+            if(userGuess == word) {
+                gameOver(true)
+                if (userGuess[index] in word) {
+                    if (userGuess[index] == word[index]) {
+                        colorMap[index] = LetterState.GREEN
+                    } else {
+                        colorMap[index] = LetterState.YELLOW
+                    }
                 }
             }
         }
         return colorMap
+    }
+
+    private fun gameOver(win: Boolean){
+        val gameState = _gameEndState.value
+        val newGameState = gameState?.copy(gameEnded = true, gameWon = win)
+        _gameEndState.value = newGameState!!
     }
 
     fun wordValidation(userGuess: String): Boolean {

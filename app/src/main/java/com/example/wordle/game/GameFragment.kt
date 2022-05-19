@@ -10,6 +10,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.Spanned
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,14 +25,15 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.wordle.R
 import com.example.wordle.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
     private lateinit var viewModel: GameViewModel
-    private lateinit var wordView: LinearLayout // Keeps track of the linearlayout that is edited
-    private var tempWord = ""
+    private lateinit var wordView: LinearLayout // Keeps track of the linearlayout that is being edited
+    lateinit var colorMap: Map<Int, LetterState>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,16 +44,31 @@ class GameFragment : Fragment() {
         viewModel = ViewModelProvider(this)[GameViewModel::class.java]
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
+
+        val wordObserver = Observer<Int> { newNumber ->
+            //onChanged()
+            wordView = findLinearLayoutByNumber(newNumber)
+        }
+
+        viewModel.guessNumber.observe(viewLifecycleOwner, wordObserver)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val wordObserver = Observer<Int> { newNumber ->
-            wordView = findLinearLayoutByNumber(newNumber)
+        val gameEndStateObserver = Observer<GameEndState> {
+            //onChanged()
+            if (it.gameEnded){
+                if (it.gameWon == true){
+                    //TODO: Do the cool animation
+                }else if(it.gameWon == false){
+                    showStatus(WordStatus.Word, binding.textStatus)
+                }
+            }
         }
-        viewModel.guessNumber.observe(viewLifecycleOwner, wordObserver)
+
+        viewModel.gameEndState.observe(viewLifecycleOwner, gameEndStateObserver)
 
         setClickListeners()
         keyboardSetUp()
@@ -104,7 +121,7 @@ class GameFragment : Fragment() {
                     //Check to see if the string length is 5 then submit it.
                     if (viewModel.guess.value?.length == 5) {
                         if (viewModel.wordValidation(viewModel.guess.value!!)) {
-                            tempWord = viewModel.guess.value.toString()
+                            colorMap = viewModel.evaluateWord(viewModel.guess.value!!)
                             wordRevealAnimation(wordView)
                             removeClickListeners(wordView) // You can't interact with submitted blocks after submitting
                             viewModel.submitWord()
@@ -130,7 +147,7 @@ class GameFragment : Fragment() {
                     it.text = ""
                     it.setBackgroundResource(R.drawable.letter_block_unsubmitted)
                 }
-                if (binding.guessField.text.isNotEmpty()) { //I should be using the viewModel liveData actually but whatevs
+                if (binding.guessField.text.isNotEmpty()) { //I should be using the viewModel liveData actually but whatever
                     for (letterIndex in binding.guessField.text.indices) {
                         val child = wordView.getChildAt(letterIndex)
                         if (child is TextView) {
@@ -161,8 +178,7 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun changeBackground(letterIndex: Int): Int {
-        val colorMap = viewModel.evaluateWord(tempWord)
+    private fun changeBackground(letterIndex: Int, colorMap: Map<Int, LetterState>): Int {
         return when {
             colorMap[letterIndex] == LetterState.GREEN -> {
                 (R.drawable.letter_block_green)
@@ -218,7 +234,7 @@ class GameFragment : Fragment() {
                 startDelay = offsetTime.toLong()
                 setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
-                        child.setBackgroundResource(changeBackground(index))
+                        child.setBackgroundResource(changeBackground(index, colorMap))
                         child.rotationX = 270f
                         child.animate().rotationX(360f).setListener(null)
                     }
