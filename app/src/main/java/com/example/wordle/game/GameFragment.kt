@@ -10,7 +10,6 @@ import android.content.Context
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.Spanned
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +24,6 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.wordle.R
 import com.example.wordle.databinding.FragmentGameBinding
 
@@ -44,18 +42,15 @@ class GameFragment : Fragment() {
         viewModel = ViewModelProvider(this)[GameViewModel::class.java]
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
-
-        val wordObserver = Observer<Int> { newNumber ->
-            //onChanged()
-            wordView = findLinearLayoutByNumber(newNumber)
-        }
-
-        viewModel.guessNumber.observe(viewLifecycleOwner, wordObserver)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val wordObserver = Observer<Int> { newNumber ->
+            //onChanged()
+            wordView = findLinearLayoutByNumber(newNumber)
+        }
+        viewModel.guessNumber.observe(viewLifecycleOwner, wordObserver)
 
         val gameEndStateObserver = Observer<GameEndState> {
             //onChanged()
@@ -63,11 +58,10 @@ class GameFragment : Fragment() {
                 if (it.gameWon == true){
                     //TODO: Do the cool animation
                 }else if(it.gameWon == false){
-                    showStatus(WordStatus.Word, binding.textStatus)
+                    showStatusAnimation(WordStatus.WORD, binding.textStatus)
                 }
             }
         }
-
         viewModel.gameEndState.observe(viewLifecycleOwner, gameEndStateObserver)
 
         setClickListeners()
@@ -76,6 +70,7 @@ class GameFragment : Fragment() {
 
 
     private fun showKeyBoard(editText: EditText) {
+        //Open keyboard manually
         editText.requestFocus()
         val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
@@ -86,7 +81,7 @@ class GameFragment : Fragment() {
             if (it is ViewGroup) {
                 //For each item in the viewGroup (Each row)...
                 for (i in 0 until it.childCount) {
-                    //..Set a click listener for the item
+                    //..Set a click listener for the item to open the keyboard
                     val child = it.getChildAt(i)
                     child.setOnClickListener {
                         showKeyBoard(binding.guessField)
@@ -127,11 +122,11 @@ class GameFragment : Fragment() {
                             viewModel.submitWord()
                         } else {
                             invalidationShakeAnimation(wordView)
-                            showStatus(WordStatus.NonWord, binding.textStatus)
+                            showStatusAnimation(WordStatus.NON_WORD, binding.textStatus)
                         }
                     } else {
                         invalidationShakeAnimation(wordView)
-                        showStatus(WordStatus.TooShort, binding.textStatus)
+                        showStatusAnimation(WordStatus.TOO_SHORT, binding.textStatus)
                     }
                     true
                 }
@@ -139,8 +134,8 @@ class GameFragment : Fragment() {
             }
         }
         val letterFilter = AlphabetFilter()
-        val maxLength = InputFilter.LengthFilter(5)
-        binding.guessField.filters = arrayOf(letterFilter, maxLength)
+        val maxLengthFilter = InputFilter.LengthFilter(5)
+        binding.guessField.filters = arrayOf(letterFilter, maxLengthFilter)
         binding.guessField.doOnTextChanged { _, _, _, _ ->
             wordView.forEach {
                 if (it is TextView) {
@@ -192,21 +187,21 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun showStatus(status: WordStatus, view: TextView){
+    private fun showStatusAnimation(status: WordStatus, view: TextView){
         view.visibility = View.VISIBLE
         view.alpha = 1f
         when (status){
-            WordStatus.TooShort -> {
+            WordStatus.TOO_SHORT -> {
                 view.text = resources.getText(R.string.short_word)
             }
-            WordStatus.NonWord -> {
+            WordStatus.NON_WORD -> {
                 view.text = resources.getText(R.string.non_word)
             }
-            WordStatus.Word -> {
+            WordStatus.WORD -> {
                 view.text = viewModel.getWord()
             }
         }
-        view.postDelayed({ viewFadeOutAnimation(view) }, 1200)
+        view.postDelayed({ viewFadeOutAnimation(view) }, 1800)
     }
 
     private fun invalidationShakeAnimation(view: View) {
