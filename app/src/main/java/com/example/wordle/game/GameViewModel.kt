@@ -10,7 +10,7 @@ const val NUMBER_OF_GUESSES = 6
 
 class GameViewModel : ViewModel() {
     //This variable tracks how many times we have guessed
-    private val _guessNumber = MutableLiveData<Int>()
+    private val _guessNumber = MutableLiveData<Int>(0)
     val guessNumber: LiveData<Int> = _guessNumber
 
     //tracks if the game is over
@@ -41,7 +41,6 @@ class GameViewModel : ViewModel() {
             _guessNumber.value = _guessNumber.value?.plus(1)
             guess.value = ""
         }else{
-            Log.i("GameViewModel", "Game Over")
             gameOver(false)
         }
     }
@@ -57,12 +56,12 @@ class GameViewModel : ViewModel() {
         for (index in word.indices) {
             if(userGuess == word) {
                 gameOver(true)
-                if (userGuess[index] in word) {
-                    if (userGuess[index] == word[index]) {
-                        colorMap[index] = LetterState.GREEN
-                    } else {
-                        colorMap[index] = LetterState.YELLOW
-                    }
+            }
+            if (userGuess[index] in word) {
+                if (userGuess[index] == word[index]) {
+                    colorMap[index] = LetterState.GREEN
+                } else {
+                    colorMap[index] = LetterState.YELLOW
                 }
             }
         }
