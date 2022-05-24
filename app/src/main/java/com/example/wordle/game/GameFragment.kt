@@ -10,6 +10,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.Spanned
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,14 +23,14 @@ import android.widget.TextView
 import androidx.core.view.forEach
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.wordle.R
 import com.example.wordle.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
-    private lateinit var viewModel: GameViewModel
+    private val viewModel: GameViewModel by activityViewModels()
     private lateinit var wordView: LinearLayout // Keeps track of the linearlayout that is being edited
     lateinit var colorMap: Map<Int, LetterState>
 
@@ -39,7 +40,7 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGameBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[GameViewModel::class.java]
+        Log.i("GameFragment", "$viewModel")
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
         return binding.root
@@ -49,30 +50,31 @@ class GameFragment : Fragment() {
         val wordObserver = Observer<Int> { newNumber ->
             //onChanged()
             wordView = findLinearLayoutByNumber(newNumber)
+            Log.i("GameFragment", "wordView: $newNumber")
         }
         viewModel.guessNumber.observe(viewLifecycleOwner, wordObserver)
 
         val gameEndStateObserver = Observer<GameEndState> {
             //onChanged()
-            if (it.gameEnded){
-                if (it.gameWon == true){
-                    //TODO: Do the cool animation
-                }else if(it.gameWon == false){
+            if (it.gameEnded) {
+                if (it.gameWon == true) {
+                    TODO("Do something here")
+                } else if (it.gameWon == false) {
                     showStatusAnimation(WordStatus.WORD, binding.textStatus)
                 }
+            } else if (!it.gameEnded) {
+                playAgain()
+                Log.i("GameFragment", "Game Restarted")
             }
         }
         viewModel.gameEndState.observe(viewLifecycleOwner, gameEndStateObserver)
-
-        setClickListeners()
-        keyboardSetUp()
     }
-
 
     private fun showKeyBoard(editText: EditText) {
         //Open keyboard manually
         editText.requestFocus()
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
 
@@ -82,7 +84,11 @@ class GameFragment : Fragment() {
                 //For each item in the viewGroup (Each row)...
                 for (i in 0 until it.childCount) {
                     //..Set a click listener for the item to open the keyboard
-                    val child = it.getChildAt(i)
+                    val child = it.getChildAt(i) ?: return
+                    child.setBackgroundResource(R.drawable.letter_block_unsubmitted)
+                    if (child is TextView) {
+                        child.text = ""
+                    }
                     child.setOnClickListener {
                         showKeyBoard(binding.guessField)
                     }
@@ -113,13 +119,13 @@ class GameFragment : Fragment() {
         binding.guessField.setOnEditorActionListener { _, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
-                    //Check to see if the string length is 5 then submit it.
-                    if (viewModel.guess.value?.length == 5) {
-                        if (viewModel.wordValidation(viewModel.guess.value!!)) {
-                            colorMap = viewModel.evaluateWord(viewModel.guess.value!!)
+                    val string = viewModel.guess.value
+                    //Check to see if the string is 5 letters long then submit it.
+                    if (string?.length == 5) {
+                        if (viewModel.wordValidation(string)) {
+                            colorMap = viewModel.evaluateWord(string)
                             wordRevealAnimation(wordView)
                             removeClickListeners(wordView) // You can't interact with submitted blocks after submitting
-                            viewModel.submitWord()
                         } else {
                             invalidationShakeAnimation(wordView)
                             showStatusAnimation(WordStatus.NON_WORD, binding.textStatus)
@@ -176,32 +182,43 @@ class GameFragment : Fragment() {
     private fun changeBackground(letterIndex: Int, colorMap: Map<Int, LetterState>): Int {
         return when {
             colorMap[letterIndex] == LetterState.GREEN -> {
-                (R.drawable.letter_block_green)
+                R.drawable.letter_block_green
             }
             colorMap[letterIndex] == LetterState.YELLOW -> {
-                (R.drawable.letter_block_yellow)
+                R.drawable.letter_block_yellow
             }
             else -> {
-                (R.drawable.letter_block_wrong)
+                R.drawable.letter_block_wrong
             }
         }
     }
 
-    private fun showStatusAnimation(status: WordStatus, view: TextView){
+    private fun showStatusAnimation(status: WordStatus, view: TextView) {
         view.visibility = View.VISIBLE
         view.alpha = 1f
-        when (status){
+        var delay = 0
+        when (status) {
             WordStatus.TOO_SHORT -> {
                 view.text = resources.getText(R.string.short_word)
+                delay = 1800
             }
             WordStatus.NON_WORD -> {
                 view.text = resources.getText(R.string.non_word)
+                delay = 1800
             }
             WordStatus.WORD -> {
                 view.text = viewModel.getWord()
+                delay = 2800
             }
         }
-        view.postDelayed({ viewFadeOutAnimation(view) }, 1800)
+        view.postDelayed({
+            viewModel.gameEndState.value?.let {
+                viewFadeOutAnimation(
+                    view,
+                    it.gameEnded
+                )
+            }
+        }, delay.toLong())
     }
 
     private fun invalidationShakeAnimation(view: View) {
@@ -225,24 +242,55 @@ class GameFragment : Fragment() {
             val child = linearLayout.getChildAt(index)
             child.rotationX = 0f
             child.animate().apply {
-                rotationX(90f)
                 startDelay = offsetTime.toLong()
+                rotationX(90f)
                 setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
                         child.setBackgroundResource(changeBackground(index, colorMap))
                         child.rotationX = 270f
                         child.animate().rotationX(360f).setListener(null)
+                        setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                //After the last block has finished animating
+                                if (index == 4) {
+                                    if (viewModel.guess.value?.let { viewModel.wordCheck(it) } == true) {
+                                        //TODO: Run the game won animation. At the end of it, run the viewModel.submitWord() function
+                                    } else {
+                                        viewModel.submitWord()
+                                    }
+                                }
+                            }
+                        })
                     }
                 })
             }
-            offsetTime += 75
+            offsetTime += 150
         }
     }
 
-    private fun viewFadeOutAnimation(view: View){
+    private fun viewFadeOutAnimation(view: View, gameEnd: Boolean) {
         view.animate().apply {
-           alpha(0f)
+            alpha(0f)
             duration = 200
+            setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator?) {
+                    if (gameEnd) {
+                        showGameEndDialog()
+                    }
+                }
+            })
         }
+    }
+
+    private fun showGameEndDialog() {
+        val dialog = GameEndDialogFragment()
+        dialog.show(requireActivity().supportFragmentManager, "GameEnded")
+    }
+
+    private fun playAgain() {
+        setClickListeners()
+        Log.i("GameFragment", "ClickListeners Set")
+        keyboardSetUp()
+        Log.i("GameFragment", "Keyboard Setup")
     }
 }
