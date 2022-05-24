@@ -4,7 +4,7 @@
 
 🚧The game is still being developed 🚧
 
-This is the game as of May 11th 2022
+This is the game as of May 20th 2022
 
 # Intro
 
@@ -18,15 +18,25 @@ This is a tab just above the soft keyboard to show the user the previous words u
 
 ### 2. The replay button
 
+Instead of having to wait for the next day’s wordle, users can get access to another word instantly and play another game instantly
+
 ---
 
 # Technical Tools Used
 
 ## Architecture
 
-This app used an MVVM architecture for the game
+This app used an MVVM architecture for the game with liveData providing observable data for the view to use.
 
-ViewBinding was also heavily used thoughout the project
+ViewBinding was also quite heavily used thoughout the project
+
+Triggering view events from the viewModel was a little challenging but it was completed
+
+### 🔗Helpful links for this component
+
+[Handle ViewModel events](https://developer.android.com/topic/architecture/ui-layer/events#handle-viewmodel-events)
+
+[Michael Ferguson: Sending ViewModel Events to the UI](https://proandroiddev.com/sending-view-model-events-to-the-ui-eef76bdd632c)
 
 ## ⌨️ Text Entry
 
@@ -38,13 +48,13 @@ I used Livedata to determine which squares, the text would be entered in
 
 ### 🔗Helpful links for this component
 
-[[Android Docs]: Handling input method visibility](https://developer.android.com/training/keyboard-input/visibility#kotlin)
+[Handling input method visibility](https://developer.android.com/training/keyboard-input/visibility#kotlin)
 
-[[Stack Overflow]: Using a single onClick method for multiple buttons](https://stackoverflow.com/questions/7873480/android-one-onclick-method-for-multiple-buttons)
+[Using a single onClick method for multiple buttons](https://stackoverflow.com/questions/7873480/android-one-onclick-method-for-multiple-buttons)
 
-[[Stack Overflow]: Making EditText invisible, but editable](https://stackoverflow.com/questions/18159263/android-hidden-but-select-able-edittext)
+[Making EditText invisible, but editable](https://stackoverflow.com/questions/18159263/android-hidden-but-select-able-edittext)
 
-[[YouTube]: Restrict Input to Emoji](https://www.youtube.com/watch?v=LZppoEuviSw&t=354s&ab_channel=RahulPandey)
+[Restrict Input to Emoji](https://www.youtube.com/watch?v=LZppoEuviSw&t=354s&ab_channel=RahulPandey)
 
 ## 📹 Animation
 
@@ -52,8 +62,8 @@ This was definitely the hardest part of the app to get right, but this was impor
 
 ### 🔗Helpful links for this component
 
-[[Android Docs]: Property Animation Overview](https://developer.android.com/guide/topics/graphics/prop-animation)
+[Android Docs: Property Animation Overview](https://developer.android.com/guide/topics/graphics/prop-animation)
 
-[[Stack Overflow]: Multiple View Property Animators](https://stackoverflow.com/questions/46397561/multiple-viewpropertyanimators)
+[Multiple View Property Animators](https://stackoverflow.com/questions/46397561/multiple-viewpropertyanimators)
 
-[[Stack Overflow]: Flipping and changing image in ImageView](https://stackoverflow.com/questions/37028694/flipping-and-changing-image-in-imageview)
+[Flipping and changing image in ImageView](https://stackoverflow.com/questions/37028694/flipping-and-changing-image-in-imageview)
