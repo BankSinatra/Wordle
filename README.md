@@ -1,10 +1,12 @@
-# WORDLE Clone
+# 🚧 WORDLE Clone 🚧
 
 ---
 
-🚧The game is still being developed 🚧
+# 🌁 Screenshots
 
-This is the game as of May 20th 2022
+![Screenshot_20220524-135635.jpg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/28a61225-318d-4c44-8749-4f38d452d0ac/Screenshot_20220524-135635.jpg)
+
+![Screenshot_20220524-135828.jpg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/836a333c-1190-4400-aaa7-4e26afc53a0e/Screenshot_20220524-135828.jpg)
 
 # Intro
 
