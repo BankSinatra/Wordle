@@ -40,7 +40,6 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGameBinding.inflate(inflater, container, false)
-        Log.i("GameFragment", "$viewModel")
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
         return binding.root
@@ -50,24 +49,27 @@ class GameFragment : Fragment() {
         val wordObserver = Observer<Int> { newNumber ->
             //onChanged()
             wordView = findLinearLayoutByNumber(newNumber)
-            Log.i("GameFragment", "wordView: $newNumber")
         }
         viewModel.guessNumber.observe(viewLifecycleOwner, wordObserver)
 
         val gameEndStateObserver = Observer<GameEndState> {
             //onChanged()
             if (it.gameEnded) {
-                if (it.gameWon == true) {
-                    TODO("Do something here")
-                } else if (it.gameWon == false) {
+                if (it.gameWon == false) {
                     showStatusAnimation(WordStatus.WORD, binding.textStatus)
                 }
             } else if (!it.gameEnded) {
                 playAgain()
-                Log.i("GameFragment", "Game Restarted")
             }
         }
         viewModel.gameEndState.observe(viewLifecycleOwner, gameEndStateObserver)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(viewModel.gameEndState.value?.gameEnded == true){
+            showGameEndDialog()
+        }
     }
 
     private fun showKeyBoard(editText: EditText) {
@@ -254,7 +256,7 @@ class GameFragment : Fragment() {
                                 //After the last block has finished animating
                                 if (index == 4) {
                                     if (viewModel.guess.value?.let { viewModel.wordCheck(it) } == true) {
-                                        //TODO: Run the game won animation. At the end of it, run the viewModel.submitWord() function
+                                        correctWordAnimation(linearLayout)
                                     } else {
                                         viewModel.submitWord()
                                     }
@@ -265,6 +267,30 @@ class GameFragment : Fragment() {
                 })
             }
             offsetTime += 150
+        }
+    }
+
+    private fun correctWordAnimation(linearLayout: ViewGroup){
+        var offsetTime = 0
+        for (index in 0 until linearLayout.childCount){
+            val child = linearLayout.getChildAt(index)
+            child.animate().apply {
+                startDelay = offsetTime.toLong()
+                translationYBy(-80f)
+                setListener(object : AnimatorListenerAdapter(){
+                    override fun onAnimationEnd(animation: Animator?) {
+                        translationYBy(80f)
+                        setListener(object : AnimatorListenerAdapter(){
+                            override fun onAnimationEnd(animation: Animator?) {
+                                if(index == 4){
+                                    showGameEndDialog()
+                                }
+                            }
+                        })
+                    }
+                })
+            }
+            offsetTime += 170
         }
     }
 
@@ -289,8 +315,6 @@ class GameFragment : Fragment() {
 
     private fun playAgain() {
         setClickListeners()
-        Log.i("GameFragment", "ClickListeners Set")
         keyboardSetUp()
-        Log.i("GameFragment", "Keyboard Setup")
     }
 }
