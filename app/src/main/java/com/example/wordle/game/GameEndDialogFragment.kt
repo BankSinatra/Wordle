@@ -2,6 +2,7 @@ package com.example.wordle.game
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -23,12 +24,15 @@ class GameEndDialogFragment : DialogFragment() {
             val againButton: Button = dialogView.findViewById(R.id.play_again_button)
             val shareButton: Button = dialogView.findViewById(R.id.share_button)
             againButton.setOnClickListener {
-                Log.i("Dialog", "ClickListener called")
-                Log.i("Dialog", "Location: $model")
                 model.resetGame()
                 dismiss()
             }
             shareButton.setOnClickListener {
+                val intent = Intent(Intent.ACTION_SEND)
+                val shareBody = model.getMap()
+                intent.type = "text/plain"
+                intent.putExtra(Intent.EXTRA_TEXT, shareBody)
+                startActivity(Intent.createChooser(intent, "share"))
                 dismiss()
             }
 
