@@ -13,7 +13,7 @@ class GameViewModel : ViewModel() {
     private val _guessNumber = MutableLiveData<Int>(0)
     val guessNumber: LiveData<Int> = _guessNumber
 
-    //tracks if the game is over
+    //Tracks if the game is over
     private val _gameEndState = MutableLiveData(GameEndState())
     val gameEndState: LiveData<GameEndState> = _gameEndState
 
@@ -27,9 +27,16 @@ class GameViewModel : ViewModel() {
         word = allWordsList.random()
     }
 
-    private fun resetGame() {
+    fun resetGame() {
         generateWord()
         _guessNumber.value = 0
+        guess.value = ""
+        val gameState = _gameEndState.value
+        if (gameState?.gameEnded == true) {
+            val newGameState = gameState.copy(gameEnded = false, gameWon = null)
+            _gameEndState.value = newGameState
+        }
+
     }
 
     init {
@@ -40,8 +47,17 @@ class GameViewModel : ViewModel() {
         if (_guessNumber.value!! < NUMBER_OF_GUESSES - 1) {
             _guessNumber.value = _guessNumber.value?.plus(1)
             guess.value = ""
-        }else{
+        } else {
             gameOver(false)
+        }
+    }
+
+    fun wordCheck(userGuess: String): Boolean {
+        return if (userGuess == word) {
+            gameOver(true)
+            true
+        } else {
+            false
         }
     }
 
@@ -54,9 +70,6 @@ class GameViewModel : ViewModel() {
             4 to LetterState.WRONG
         )
         for (index in word.indices) {
-            if(userGuess == word) {
-                gameOver(true)
-            }
             if (userGuess[index] in word) {
                 if (userGuess[index] == word[index]) {
                     colorMap[index] = LetterState.GREEN
@@ -68,7 +81,7 @@ class GameViewModel : ViewModel() {
         return colorMap
     }
 
-    private fun gameOver(win: Boolean){
+    private fun gameOver(win: Boolean) {
         val gameState = _gameEndState.value
         val newGameState = gameState?.copy(gameEnded = true, gameWon = win)
         _gameEndState.value = newGameState!!
