@@ -3,10 +3,14 @@
 ---
 
 # 🌁 Screenshots
+A game won screen             |  A game over dialog
+:-------------------------:|:-------------------------:
+![Screenshot_20220524-135635](https://user-images.githubusercontent.com/51966182/170122362-3d345f26-2e40-4724-aa35-91c4b30eae2f.jpg)  |  ![Screenshot_20220524-135031](https://user-images.githubusercontent.com/51966182/170122390-10b8425d-cb95-43b4-8eb2-8d852291fd40.jpg)
 
-![Screenshot_20220524-135635.jpg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/28a61225-318d-4c44-8749-4f38d452d0ac/Screenshot_20220524-135635.jpg)
 
-![Screenshot_20220524-135828.jpg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/836a333c-1190-4400-aaa7-4e26afc53a0e/Screenshot_20220524-135828.jpg)
+
+
+
 
 # Intro
 
