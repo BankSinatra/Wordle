@@ -20,6 +20,8 @@ class GameViewModel : ViewModel() {
     //This variable keeps track of the word we are guessing
     val guess = MutableLiveData("")
 
+    private val map: MutableList<MutableMap<Int, LetterState>> = mutableListOf()
+
     //We'll pick a word to guess later hold on
     private lateinit var word: String
 
@@ -36,7 +38,7 @@ class GameViewModel : ViewModel() {
             val newGameState = gameState.copy(gameEnded = false, gameWon = null)
             _gameEndState.value = newGameState
         }
-
+        map.clear()
     }
 
     init {
@@ -78,6 +80,7 @@ class GameViewModel : ViewModel() {
                 }
             }
         }
+        map.add(colorMap)
         return colorMap
     }
 
@@ -93,6 +96,25 @@ class GameViewModel : ViewModel() {
 
     fun getWord(): String {
         return word
+    }
+
+    fun getMap(): String {
+        val word = getWord()
+        val tries = _guessNumber.value?.plus(1)
+        var grid = ""
+
+        for (item in map) {
+            for (square in item) {
+                grid += when (square.value) {
+                    LetterState.GREEN -> String(Character.toChars(0x1F7E9))//🟩
+                    LetterState.YELLOW -> String(Character.toChars(0x1F7E8))//🟨
+                    else -> String(Character.toChars(0x2B1C))//⬜
+                }
+            }
+            grid += "\n"
+        }
+
+        return "Eyram's Wordle Clone $tries/6 \n Word: $word \n $grid \nCheck out the project on Github https://github.com/BankSinatra/Wordle"
     }
 }
 
