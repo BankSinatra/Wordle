@@ -1,4 +1,4 @@
-# 🚧 WORDLE Clone 🚧
+# WORDLE Clone
 
 ---
 
