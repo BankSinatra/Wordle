@@ -16,7 +16,7 @@ A game won screen             |  A game over dialog
 
 ---
 
-The Wordle clone app plays just like the traditional wordle. It even has a score and  Except there are a couple of features
+The Wordle clone app plays just like the traditional wordle. It even has a score and sharing features like the original game. There are a series of new features in this version
 
 ### 1. The previous letters tab
 
