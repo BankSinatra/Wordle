@@ -32,7 +32,7 @@ Instead of having to wait for the next day’s wordle, users can get access to a
 
 ## Architecture
 
-This app used an MVVM architecture for the game with liveData providing observable data for the view to use.
+This app used a simple view-view model architecture for the game with liveData providing observable data for the view to use.
 
 ViewBinding was also quite heavily used thoughout the project
 
